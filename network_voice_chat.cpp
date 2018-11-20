@@ -32,6 +32,11 @@ void Network_Voice_Chat::bind(unsigned short port)
     sf::UdpSocket::bind(port);
 }
 
+void Network_Voice_Chat::setProcessingInterval(sf::Time interval)
+{
+    sf::SoundRecorder::setProcessingInterval(interval);
+}
+
 void Network_Voice_Chat::start(unsigned int sampleRate)
 {
     sf::SoundStream::initialize(sf::SoundRecorder::getChannelCount(), sampleRate);
