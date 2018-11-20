@@ -34,8 +34,8 @@ void Network_Voice_Chat::bind(unsigned short port)
 
 void Network_Voice_Chat::start(unsigned int sampleRate)
 {
-    m_buffer.emplace();
     sf::SoundStream::initialize(sf::SoundRecorder::getChannelCount(), sampleRate);
+    m_buffer.emplace();
     sf::SoundRecorder::start(sampleRate);
     sf::SoundStream::play();
 }
