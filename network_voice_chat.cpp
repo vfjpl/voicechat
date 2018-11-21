@@ -49,4 +49,5 @@ void Network_Voice_Chat::stop()
 {
     sf::SoundStream::stop();
     sf::SoundRecorder::stop();
+    m_buffer.clear();
 }
