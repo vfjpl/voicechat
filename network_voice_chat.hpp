@@ -3,11 +3,10 @@
 
 #include <SFML/Network.hpp>
 #include <SFML/Audio.hpp>
-#include <queue>
 
 class Network_Voice_Chat: private sf::SoundRecorder, private sf::SoundStream, private sf::UdpSocket
 {
-    std::queue <sf::Packet> m_buffer;
+    sf::Packet m_buffer;
     sf::IpAddress m_ip;
     unsigned short m_port;
 
