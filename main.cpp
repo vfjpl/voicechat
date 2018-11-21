@@ -11,7 +11,7 @@ int main(int argc, char* argv[])
     voicechat.bind(7000);
     voicechat.set_ip_port(argv[1], 7000);
 
-    voicechat.start(48000);
+    voicechat.start();
     while(true)
         sf::sleep(clock.restart());
     voicechat.stop();
