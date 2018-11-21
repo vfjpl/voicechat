@@ -4,7 +4,7 @@ void Network_Voice_Chat::onSeek(sf::Time timeOffset) {}
 
 bool Network_Voice_Chat::onProcessSamples(const sf::Int16* samples, std::size_t sampleCount)
 {
-    send(samples, sampleCount*2, m_ip, m_port);
+    sf::UdpSocket::send(samples, sampleCount*2, m_ip, m_port);
     return true;
 }
 
@@ -15,7 +15,10 @@ bool Network_Voice_Chat::onGetData(sf::SoundStream::Chunk& data)
 
     m_buffer.pop();
     m_buffer.emplace();
-    receive(m_buffer.back(), ip, port);
+    sf::UdpSocket::receive(m_buffer.back(), ip, port);
+    m_ip = ip;
+    m_port = port;
+
     data.samples = (const sf::Int16*)m_buffer.front().getData();
     data.sampleCount = m_buffer.front().getDataSize()/2;
     return true;
@@ -41,6 +44,7 @@ void Network_Voice_Chat::start(unsigned int sampleRate)
 {
     sf::SoundStream::initialize(sf::SoundRecorder::getChannelCount(), sampleRate);
     m_buffer.emplace();
+
     sf::SoundRecorder::start(sampleRate);
     sf::SoundStream::play();
 }
@@ -49,6 +53,7 @@ void Network_Voice_Chat::stop()
 {
     sf::SoundStream::stop();
     sf::SoundRecorder::stop();
+
     while(!m_buffer.empty())
         m_buffer.pop();
 }
