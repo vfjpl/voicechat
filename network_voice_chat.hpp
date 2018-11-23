@@ -1,14 +1,15 @@
 #ifndef NETWORK_VOICE_CHAT_HPP_INCLUDED
 #define NETWORK_VOICE_CHAT_HPP_INCLUDED
 
-#include <SFML/Audio/SoundRecorder.hpp>
 #include <SFML/Audio/SoundStream.hpp>
-#include <SFML/Network/UdpSocket.hpp>
+#include <SFML/Audio/SoundRecorder.hpp>
 #include <SFML/Network/Packet.hpp>
+#include <SFML/Network/UdpSocket.hpp>
 
-class Network_Voice_Chat: private sf::SoundRecorder, private sf::SoundStream, private sf::UdpSocket
+class Network_Voice_Chat: private sf::SoundStream, private sf::SoundRecorder
 {
     sf::Packet m_buffer;
+    sf::UdpSocket m_socket;
     sf::IpAddress m_ip;
     unsigned short m_port;
 
@@ -19,6 +20,7 @@ class Network_Voice_Chat: private sf::SoundRecorder, private sf::SoundStream, pr
 public:
     void set_ip_port(sf::IpAddress ip, unsigned short port);
     void bind(unsigned short port);
+    void unbind();
     void setProcessingInterval(sf::Time interval);
     void start(unsigned int sampleRate = 48000);
     void stop();

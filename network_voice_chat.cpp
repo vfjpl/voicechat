@@ -4,7 +4,7 @@ void Network_Voice_Chat::onSeek(sf::Time timeOffset) {}
 
 bool Network_Voice_Chat::onProcessSamples(const sf::Int16* samples, std::size_t sampleCount)
 {
-    sf::UdpSocket::send(samples, sampleCount*2, m_ip, m_port);
+    m_socket.send(samples, sampleCount*2, m_ip, m_port);
     return true;
 }
 
@@ -13,7 +13,7 @@ bool Network_Voice_Chat::onGetData(sf::SoundStream::Chunk& data)
     sf::IpAddress ip;
     unsigned short port;
 
-    sf::UdpSocket::receive(m_buffer, ip, port);
+    m_socket.receive(m_buffer, ip, port);
     m_ip = ip;
     m_port = port;
 
@@ -30,7 +30,12 @@ void Network_Voice_Chat::set_ip_port(sf::IpAddress ip, unsigned short port)
 
 void Network_Voice_Chat::bind(unsigned short port)
 {
-    sf::UdpSocket::bind(port);
+    m_socket.bind(port);
+}
+
+void Network_Voice_Chat::unbind()
+{
+    m_socket.unbind();
 }
 
 void Network_Voice_Chat::setProcessingInterval(sf::Time interval)
