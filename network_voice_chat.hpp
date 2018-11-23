@@ -1,8 +1,10 @@
 #ifndef NETWORK_VOICE_CHAT_HPP_INCLUDED
 #define NETWORK_VOICE_CHAT_HPP_INCLUDED
 
-#include <SFML/Network.hpp>
-#include <SFML/Audio.hpp>
+#include <SFML/Audio/SoundRecorder.hpp>
+#include <SFML/Audio/SoundStream.hpp>
+#include <SFML/Network/UdpSocket.hpp>
+#include <SFML/Network/Packet.hpp>
 
 class Network_Voice_Chat: private sf::SoundRecorder, private sf::SoundStream, private sf::UdpSocket
 {
