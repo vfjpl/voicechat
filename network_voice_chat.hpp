@@ -18,10 +18,9 @@ class Network_Voice_Chat: private sf::SoundStream, private sf::SoundRecorder
     bool onGetData(sf::SoundStream::Chunk& data);
 
 public:
-    void set_ip_port(sf::IpAddress ip, unsigned short port);
-    void bind(unsigned short port);
-    void unbind();
     void setProcessingInterval(sf::Time interval);
+    void setRemote(sf::IpAddress ip, unsigned short port = 7000);
+    void bind(unsigned short port = 7000);
     void start(unsigned int sampleRate = 48000);
     void stop();
 };

@@ -22,7 +22,12 @@ bool Network_Voice_Chat::onGetData(sf::SoundStream::Chunk& data)
     return true;
 }
 
-void Network_Voice_Chat::set_ip_port(sf::IpAddress ip, unsigned short port)
+void Network_Voice_Chat::setProcessingInterval(sf::Time interval)
+{
+    sf::SoundRecorder::setProcessingInterval(interval);
+}
+
+void Network_Voice_Chat::setRemote(sf::IpAddress ip, unsigned short port)
 {
     m_ip = ip;
     m_port = port;
@@ -31,16 +36,6 @@ void Network_Voice_Chat::set_ip_port(sf::IpAddress ip, unsigned short port)
 void Network_Voice_Chat::bind(unsigned short port)
 {
     m_socket.bind(port);
-}
-
-void Network_Voice_Chat::unbind()
-{
-    m_socket.unbind();
-}
-
-void Network_Voice_Chat::setProcessingInterval(sf::Time interval)
-{
-    sf::SoundRecorder::setProcessingInterval(interval);
 }
 
 void Network_Voice_Chat::start(unsigned int sampleRate)
@@ -54,5 +49,4 @@ void Network_Voice_Chat::stop()
 {
     sf::SoundStream::stop();
     sf::SoundRecorder::stop();
-    m_buffer.clear();
 }
