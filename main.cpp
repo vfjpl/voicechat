@@ -7,10 +7,7 @@ int main(int argc, char* argv[])
     if(argc != 2)
         return EXIT_FAILURE;
 
-    voicechat.setRemote(argv[1]);
-    voicechat.bind();
-
-    voicechat.start();
+    voicechat.start(argv[1]);
     while(getwchar() != L'Q');
     voicechat.stop();
 

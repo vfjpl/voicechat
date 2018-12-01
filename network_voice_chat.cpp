@@ -27,20 +27,13 @@ void Network_Voice_Chat::setProcessingInterval(sf::Time interval)
     sf::SoundRecorder::setProcessingInterval(interval);
 }
 
-void Network_Voice_Chat::setRemote(sf::IpAddress ip, unsigned short port)
-{
-    m_ip = ip;
-    m_port = port;
-}
-
-void Network_Voice_Chat::bind(unsigned short port)
+void Network_Voice_Chat::start(sf::IpAddress ip, unsigned int sampleRate, unsigned short port)
 {
     m_socket.bind(port);
-}
-
-void Network_Voice_Chat::start(unsigned int sampleRate)
-{
     sf::SoundStream::initialize(sf::SoundRecorder::getChannelCount(), sampleRate);
+    m_ip = ip;
+    m_port = port;
+
     sf::SoundRecorder::start(sampleRate);
     sf::SoundStream::play();
 }
