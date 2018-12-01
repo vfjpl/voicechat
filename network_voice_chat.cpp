@@ -4,7 +4,7 @@ void Network_Voice_Chat::onSeek(sf::Time timeOffset) {}
 
 bool Network_Voice_Chat::onProcessSamples(const sf::Int16* samples, std::size_t sampleCount)
 {
-    m_socket.send(samples, sampleCount*2, m_ip, m_port);
+    m_socket.send(samples, sampleCount*sizeof(sf::Int16), m_ip, m_port);
     return true;
 }
 
@@ -18,7 +18,7 @@ bool Network_Voice_Chat::onGetData(sf::SoundStream::Chunk& data)
     m_port = port;
 
     data.samples = (sf::Int16*)m_buffer.getData();
-    data.sampleCount = m_buffer.getDataSize()/2;
+    data.sampleCount = m_buffer.getDataSize()/sizeof(sf::Int16);
     return true;
 }
 
