@@ -7,10 +7,6 @@ int main(int argc, char* argv[])
     if(argc != 2)
         return EXIT_FAILURE;
 
-    if(!sf::SoundRecorder::isAvailable())
-        return EXIT_FAILURE;
-
-    voicechat.setProcessingInterval(sf::milliseconds(10));
     voicechat.set_ip_port(argv[1], 7000);
     voicechat.bind(7000);
 

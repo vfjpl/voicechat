@@ -17,7 +17,7 @@ bool Network_Voice_Chat::onGetData(sf::SoundStream::Chunk& data)
     m_ip = ip;
     m_port = port;
 
-    data.samples = (const sf::Int16*)m_buffer.getData();
+    data.samples = (sf::Int16*)m_buffer.getData();
     data.sampleCount = m_buffer.getDataSize()/2;
     return true;
 }
