@@ -19,7 +19,8 @@ class Network_Voice_Chat: private sf::SoundStream, private sf::SoundRecorder
 
 public:
     void setProcessingInterval(sf::Time interval);
-    void start(sf::IpAddress ip, unsigned int sampleRate = 48000, unsigned short port = 7000);
+    void setRemote(sf::IpAddress ip, unsigned short port = 7000);
+    void start(unsigned int sampleRate = 48000);
     void stop();
 };
 
