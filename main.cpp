@@ -7,6 +7,7 @@ int main(int argc, char* argv[])
     if(argc != 2)
         return EXIT_FAILURE;
 
+    voicechat.setProcessingInterval(sf::microseconds(10000));
     voicechat.setRemote(argv[1]);
 
     voicechat.start();

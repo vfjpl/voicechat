@@ -11,22 +11,22 @@ AR = ar
 LD = g++
 WINDRES = windres
 
-INC = 
+INC =
 CFLAGS = -Wall
-RESINC = 
-LIBDIR = 
+RESINC =
+LIBDIR =
 LIB = -lsfml-audio -lsfml-network -lsfml-system
-LDFLAGS = 
+LDFLAGS =
 
 INC_RELEASE = $(INC)
-CFLAGS_RELEASE = $(CFLAGS) -O2
+CFLAGS_RELEASE = $(CFLAGS) -O2 -ffast-math
 RESINC_RELEASE = $(RESINC)
 RCFLAGS_RELEASE = $(RCFLAGS)
 LIBDIR_RELEASE = $(LIBDIR)
 LIB_RELEASE = $(LIB)
 LDFLAGS_RELEASE = $(LDFLAGS) -s
 OBJDIR_RELEASE = obj/Release
-DEP_RELEASE = 
+DEP_RELEASE =
 OUT_RELEASE = bin/Release/voicechat
 
 OBJ_RELEASE = $(OBJDIR_RELEASE)/main.o $(OBJDIR_RELEASE)/network_voice_chat.o
@@ -35,11 +35,11 @@ all: release
 
 clean: clean_release
 
-before_release: 
+before_release:
 	test -d bin/Release || mkdir -p bin/Release
 	test -d $(OBJDIR_RELEASE) || mkdir -p $(OBJDIR_RELEASE)
 
-after_release: 
+after_release:
 
 release: before_release out_release after_release
 
@@ -52,10 +52,9 @@ $(OBJDIR_RELEASE)/main.o: main.cpp
 $(OBJDIR_RELEASE)/network_voice_chat.o: network_voice_chat.cpp
 	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c network_voice_chat.cpp -o $(OBJDIR_RELEASE)/network_voice_chat.o
 
-clean_release: 
+clean_release:
 	rm -f $(OBJ_RELEASE) $(OUT_RELEASE)
 	rm -rf bin/Release
 	rm -rf $(OBJDIR_RELEASE)
 
 .PHONY: before_release after_release clean_release
-

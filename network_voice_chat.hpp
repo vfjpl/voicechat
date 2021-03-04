@@ -13,9 +13,9 @@ class Network_Voice_Chat: private sf::SoundStream, private sf::SoundRecorder
     sf::IpAddress m_ip;
     unsigned short m_port;
 
-    void onSeek(sf::Time timeOffset);
-    bool onProcessSamples(const sf::Int16* samples, std::size_t sampleCount);
-    bool onGetData(sf::SoundStream::Chunk& data);
+    bool onProcessSamples(const sf::Int16* samples, std::size_t sampleCount) final;
+    bool onGetData(sf::SoundStream::Chunk& data) final;
+    void onSeek(sf::Time timeOffset) final;
 
 public:
     void setProcessingInterval(sf::Time interval);

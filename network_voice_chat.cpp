@@ -1,11 +1,8 @@
 #include "network_voice_chat.hpp"
-#include <iostream>
-
-void Network_Voice_Chat::onSeek(sf::Time timeOffset) {}
 
 bool Network_Voice_Chat::onProcessSamples(const sf::Int16* samples, std::size_t sampleCount)
 {
-    m_socket.send(samples, sampleCount*sizeof(sf::Int16), m_ip, m_port);
+    m_socket.send(samples, sampleCount * sizeof(sf::Int16), m_ip, m_port);
     return true;
 }
 
@@ -13,22 +10,13 @@ bool Network_Voice_Chat::onGetData(sf::SoundStream::Chunk& data)
 {
     sf::IpAddress ip;
     unsigned short port;
-
     m_socket.receive(m_buffer, ip, port);
-
-    if(m_port != port)
-    {
-        if(m_ip == ip)
-        {
-            m_port = port;
-            std::wcout << ip.toInteger() << L':' << port << L'\n';
-        }
-    }
-
     data.samples = (const sf::Int16*)m_buffer.getData();
-    data.sampleCount = m_buffer.getDataSize()/sizeof(sf::Int16);
+    data.sampleCount = m_buffer.getDataSize() / sizeof(sf::Int16);
     return true;
 }
+
+void Network_Voice_Chat::onSeek(sf::Time timeOffset) {}
 
 void Network_Voice_Chat::setProcessingInterval(sf::Time interval)
 {
