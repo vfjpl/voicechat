@@ -23,7 +23,7 @@ void Network_Voice_Chat::setProcessingInterval(sf::Time interval)
     sf::SoundRecorder::setProcessingInterval(interval);
 }
 
-void Network_Voice_Chat::setRemote(sf::IpAddress ip, unsigned short port)
+void Network_Voice_Chat::setRemote(const char* ip, unsigned short port)
 {
     m_ip = ip;
     m_port = port;
