@@ -6,16 +6,16 @@
 #include <SFML/Network/Packet.hpp>
 #include <SFML/Network/UdpSocket.hpp>
 
-class Network_Voice_Chat: private sf::SoundStream, private sf::SoundRecorder
+class Network_Voice_Chat final: private sf::SoundStream, private sf::SoundRecorder
 {
     sf::Packet m_buffer;
     sf::UdpSocket m_socket;
     sf::IpAddress m_ip;
     unsigned short m_port;
 
-    bool onProcessSamples(const sf::Int16* samples, std::size_t sampleCount) final;
-    bool onGetData(sf::SoundStream::Chunk& data) final;
-    void onSeek(sf::Time timeOffset) final;
+    bool onProcessSamples(const sf::Int16* samples, std::size_t sampleCount);
+    bool onGetData(sf::SoundStream::Chunk& data);
+    void onSeek(sf::Time timeOffset);
 
 public:
     void setProcessingInterval(sf::Time interval);
